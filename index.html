@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Planner</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Finance Planner</h1>
+        <form id="incomeForm">
+            <label for="income">Monthly Income:</label>
+            <input type="number" id="income" name="income" required>
+            <button type="submit">Calculate Budget</button>
+        </form>
+        <div id="budgetAllocation" class="hidden">
+            <h2>Budget Allocation</h2>
+            <p id="needs">Needs: $0.00</p>
+            <p id="wants">Wants: $0.00</p>
+            <p id="savings">Savings: $0.00</p>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

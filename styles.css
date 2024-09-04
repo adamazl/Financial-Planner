@@ -1,0 +1,83 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f8f4;
+    /* Light mint green background */
+}
+
+.container {
+    background-color: #ffffff;
+    /* White background for the container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    /* Adjusted for a more compact look */
+}
+
+h1 {
+    text-align: center;
+    color: #2e8b57;
+    /* Mint green color for the header */
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+    /* Dark gray text for better readability */
+}
+
+input[type="number"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    /* Full width for a cleaner look */
+}
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #2e8b57;
+    /* Mint green color for the button */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Smooth hover effect */
+}
+
+button:hover {
+    background-color: #1c6b4a;
+    /* Darker mint green for hover effect */
+}
+
+#budgetAllocation {
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+p {
+    font-size: 18px;
+    color: #555;
+    /* Medium gray text for the budget details */
+}

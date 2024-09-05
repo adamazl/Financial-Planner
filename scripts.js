@@ -9,10 +9,11 @@ document.getElementById('getStartedBtn').addEventListener('click', () => showPag
 function showPage(pageId) {
     document.querySelectorAll('.content').forEach(page => page.classList.add('hidden'));
     document.getElementById(pageId).classList.remove('hidden');
+    updateSummary();
 }
 
 // Handle income form submission
-document.getElementById('incomeForm').addEventListener('submit', function(event) {
+document.getElementById('incomeForm').addEventListener('submit', function (event) {
     event.preventDefault();
     const income = parseFloat(document.getElementById('incomeInput').value);
     if (!isNaN(income)) {
@@ -22,7 +23,7 @@ document.getElementById('incomeForm').addEventListener('submit', function(event)
 });
 
 // Handle expense form submission
-document.getElementById('expenseForm').addEventListener('submit', function(event) {
+document.getElementById('expenseForm').addEventListener('submit', function (event) {
     event.preventDefault();
     const expenseType = document.getElementById('expenseType').value;
     const expenseDesc = document.getElementById('expenseDesc').value;
@@ -32,10 +33,31 @@ document.getElementById('expenseForm').addEventListener('submit', function(event
         const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
         expenses.push({ type: expenseType, description: expenseDesc, amount: expenseAmount });
         localStorage.setItem('expenses', JSON.stringify(expenses));
-        calculateBudget();
         showPage('budget');
     }
+    updateSummary();
+    calculateBudget();
 });
+
+// Update the summary section with income and expenses
+function updateSummary() {
+    const income = parseFloat(localStorage.getItem('income')) || 0;
+    document.getElementById('summaryIncome').textContent = `Income: $${income.toFixed(2)}`;
+
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    let totalExpenses = 0;
+    const expenseList = document.getElementById('expenseList');
+    expenseList.innerHTML = ''; // Clear previous entries
+
+    expenses.forEach(exp => {
+        totalExpenses += exp.amount;
+        const li = document.createElement('li');
+        li.textContent = `${exp.type} - ${exp.description}: $${exp.amount.toFixed(2)}`;
+        expenseList.appendChild(li);
+    });
+
+    document.getElementById('summaryExpenses').textContent = `Expenses: $${totalExpenses.toFixed(2)}`;
+}
 
 // Calculate budget and display on the budget page
 function calculateBudget() {
@@ -57,4 +79,7 @@ function calculateBudget() {
 }
 
 // Show the home page initially
-showPage('home');
+document.addEventListener('DOMContentLoaded', () => {
+    showPage('home');
+    updateSummary();
+});

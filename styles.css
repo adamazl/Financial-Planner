@@ -1,77 +1,232 @@
 /* styles.css */
 
+/* Importing fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f7fa;
+    /* Light mint background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+}
+
+nav {
+    width: 100%;
+    background-color: #00796b;
+    /* Darker mint green */
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-color: #f0f8f4; /* Light mint green background */
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+nav ul li a::after {
+    content: '';
+    display: block;
+    width: 0%;
+    height: 2px;
+    background-color: #ffffff;
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+nav ul li a:hover {
+    color: #b2dfdb;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }
 
 .container {
-    background-color: #ffffff; /* White background for the container */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px; /* Adjusted for a more compact look */
+    max-width: 800px;
+    padding: 20px;
+}
+
+.summary {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    transition: box-shadow 0.3s ease;
+}
+
+.summary:hover {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.summary h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #004d40;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.summary-details {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+
+.summary-details p {
+    font-weight: 500;
+    color: #333333;
+    margin: 0;
+    font-size: 16px;
+}
+
+.summary ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    text-align: left;
+}
+
+.summary ul li {
+    padding: 5px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #555555;
+}
+
+#resetBtn {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #d32f2f;
+    /* Red for reset button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#resetBtn:hover {
+    background-color: #b71c1c;
+    /* Darker red on hover */
+}
+
+.content {
+    background-color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
-    text-align: center;
-    color: #2e8b57; /* Mint green color for the header */
+    font-family: 'Montserrat', sans-serif;
+    color: #00796b;
     margin-bottom: 20px;
+    font-size: 28px;
+    text-align: center;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
 }
 
 label {
-    font-weight: bold;
-    color: #333; /* Dark gray text for better readability */
+    font-weight: 500;
+    color: #333333;
+    font-size: 16px;
 }
 
-input[type="number"] {
-    padding: 10px;
+input[type="number"],
+input[type="text"],
+select {
+    padding: 12px 15px;
     font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%; /* Full width for a cleaner look */
+    border: 1px solid #b2dfdb;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus {
+    border-color: #00796b;
+    box-shadow: 0 0 5px rgba(0, 121, 107, 0.5);
+    outline: none;
 }
 
 button {
-    padding: 10px;
+    padding: 12px;
     font-size: 16px;
     border: none;
-    border-radius: 4px;
-    background-color: #2e8b57; /* Mint green color for the button */
+    border-radius: 5px;
+    background-color: #00796b;
     color: white;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    font-family: 'Montserrat', sans-serif;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #1c6b4a; /* Darker mint green for hover effect */
+    background-color: #004d40;
+    transform: scale(1.05);
 }
 
-#additionalIncomeContainer {
-    margin-top: 10px;
-}
-
-#additionalIncomes {
+.budget-details {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top: 20px;
 }
 
-.additional-income {
-    display: flex;
-    gap: 10px;
+.budget-details p {
+    font-size: 18px;
+    color: #333333;
+    font-weight: 500;
+    background-color: #e0f2f1;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.budget-details p:hover {
+    background-color: #b2dfdb;
 }
 
 .hidden {
@@ -79,6 +234,27 @@ button:hover {
 }
 
 p {
-    font-size: 18px;
-    color: #555; /* Medium gray text for the budget details */
+    font-size: 16px;
+    color: #555555;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Scrollbar styling for expense list */
+#expenseList {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#expenseList::-webkit-scrollbar {
+    width: 6px;
+}
+
+#expenseList::-webkit-scrollbar-thumb {
+    background-color: #b2dfdb;
+    border-radius: 3px;
+}
+
+#expenseList::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
 }

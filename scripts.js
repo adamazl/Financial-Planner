@@ -5,6 +5,9 @@ document.getElementById('expenseLink').addEventListener('click', () => showPage(
 document.getElementById('budgetLink').addEventListener('click', () => showPage('budget'));
 document.getElementById('getStartedBtn').addEventListener('click', () => showPage('income'));
 
+// Reset button event listener
+document.getElementById('resetBtn').addEventListener('click', resetAll);
+
 // Function to show/hide pages
 function showPage(pageId) {
     document.querySelectorAll('.content').forEach(page => page.classList.add('hidden'));
@@ -39,7 +42,7 @@ document.getElementById('expenseForm').addEventListener('submit', function (even
     calculateBudget();
 });
 
-// Update the summary section with income and expenses
+// Function to update the summary section with income and expenses
 function updateSummary() {
     const income = parseFloat(localStorage.getItem('income')) || 0;
     document.getElementById('summaryIncome').textContent = `Income: $${income.toFixed(2)}`;
@@ -76,6 +79,25 @@ function calculateBudget() {
     document.getElementById('needs').textContent = `Needs: $${needs}`;
     document.getElementById('wants').textContent = `Wants: $${wants}`;
     document.getElementById('savings').textContent = `Savings: $${savings}`;
+}
+
+// Reset function to clear all stored data and reset UI
+function resetAll() {
+    // Clear localStorage
+    localStorage.clear();
+
+    // Reset summary display
+    document.getElementById('summaryIncome').textContent = `Income: $0.00`;
+    document.getElementById('summaryExpenses').textContent = `Expenses: $0.00`;
+    document.getElementById('expenseList').innerHTML = '';
+
+    // Reset budget display
+    document.getElementById('needs').textContent = `Needs: $0.00`;
+    document.getElementById('wants').textContent = `Wants: $0.00`;
+    document.getElementById('savings').textContent = `Savings: $0.00`;
+
+    // Go back to the HOME page
+    showPage('home');
 }
 
 // Show the home page initially

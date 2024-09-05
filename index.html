@@ -7,31 +7,59 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Finance Planner</h1>
+    <nav>
+        <ul>
+            <li><a href="#" id="homeLink">HOME</a></li>
+            <li><a href="#" id="incomeLink">INCOME</a></li>
+            <li><a href="#" id="expenseLink">EXPENSE</a></li>
+            <li><a href="#" id="budgetLink">BUDGET</a></li>
+        </ul>
+    </nav>
+
+    <div id="home" class="content">
+        <h1>Welcome to Finance Planner</h1>
+        <p>This app helps you create a budget plan based on your monthly income and expenses.</p>
+        <button id="getStartedBtn">Get Started</button>
+    </div>
+
+    <div id="income" class="content hidden">
+        <h1>Enter Your Monthly Income</h1>
         <form id="incomeForm">
             <label for="income">Primary Monthly Income:</label>
-            <input type="number" id="income" name="income" required>
-
-            <div id="additionalIncomeContainer">
-                <label for="additionalIncome">Additional Sources of Income:</label>
-                <div id="additionalIncomes">
-                    <div class="additional-income">
-                        <input type="number" class="additional-income-input" placeholder="Additional Income">
-                    </div>
-                </div>
-                <button type="button" id="addIncomeBtn">Add Another Source</button>
-            </div>
-
-            <button type="submit">Calculate Budget</button>
+            <input type="number" id="incomeInput" placeholder="Enter your income" required>
+            <button type="submit">Next</button>
         </form>
-        <div id="budgetAllocation" class="hidden">
-            <h2>Budget Allocation</h2>
-            <p id="needs">Needs: $0.00</p>
-            <p id="wants">Wants: $0.00</p>
-            <p id="savings">Savings: $0.00</p>
-        </div>
     </div>
+
+    <div id="expense" class="content hidden">
+        <h1>Enter Your Monthly Expenses</h1>
+        <form id="expenseForm">
+            <label for="expenseType">Expense Type:</label>
+            <select id="expenseType">
+                <option value="bills">Bills</option>
+                <option value="subscriptions">Subscriptions</option>
+                <option value="utilities">Utilities</option>
+                <option value="debt">Debt</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="expenseDesc">Description:</label>
+            <input type="text" id="expenseDesc" placeholder="Expense description" required>
+
+            <label for="expenseAmount">Amount:</label>
+            <input type="number" id="expenseAmount" placeholder="Enter amount" required>
+
+            <button type="submit">Next</button>
+        </form>
+    </div>
+
+    <div id="budget" class="content hidden">
+        <h1>Your Budget Plan</h1>
+        <p id="needs">Needs: $0.00</p>
+        <p id="wants">Wants: $0.00</p>
+        <p id="savings">Savings: $0.00</p>
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>

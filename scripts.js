@@ -1,41 +1,60 @@
-// scripts.js
+// Navigation and page switching
+document.getElementById('homeLink').addEventListener('click', () => showPage('home'));
+document.getElementById('incomeLink').addEventListener('click', () => showPage('income'));
+document.getElementById('expenseLink').addEventListener('click', () => showPage('expense'));
+document.getElementById('budgetLink').addEventListener('click', () => showPage('budget'));
+document.getElementById('getStartedBtn').addEventListener('click', () => showPage('income'));
 
-document.getElementById('incomeForm').addEventListener('submit', function (event) {
+// Function to show/hide pages
+function showPage(pageId) {
+    document.querySelectorAll('.content').forEach(page => page.classList.add('hidden'));
+    document.getElementById(pageId).classList.remove('hidden');
+}
+
+// Handle income form submission
+document.getElementById('incomeForm').addEventListener('submit', function(event) {
     event.preventDefault();
+    const income = parseFloat(document.getElementById('incomeInput').value);
+    if (!isNaN(income)) {
+        localStorage.setItem('income', income);
+        showPage('expense');
+    }
+});
 
-    // Get the primary income value
-    const primaryIncome = parseFloat(document.getElementById('income').value);
+// Handle expense form submission
+document.getElementById('expenseForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const expenseType = document.getElementById('expenseType').value;
+    const expenseDesc = document.getElementById('expenseDesc').value;
+    const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
 
-    // Get additional incomes
-    const additionalIncomeInputs = document.querySelectorAll('.additional-income-input');
-    let additionalIncome = 0;
+    if (!isNaN(expenseAmount)) {
+        const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+        expenses.push({ type: expenseType, description: expenseDesc, amount: expenseAmount });
+        localStorage.setItem('expenses', JSON.stringify(expenses));
+        calculateBudget();
+        showPage('budget');
+    }
+});
 
-    additionalIncomeInputs.forEach(input => {
-        additionalIncome += parseFloat(input.value) || 0;
-    });
+// Calculate budget and display on the budget page
+function calculateBudget() {
+    const income = parseFloat(localStorage.getItem('income')) || 0;
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-    // Calculate total income
-    const totalIncome = primaryIncome + additionalIncome;
+    let totalExpenses = 0;
+    expenses.forEach(exp => totalExpenses += exp.amount);
 
-    // Calculate budget allocations
-    const needs = (totalIncome * 0.50).toFixed(2);
-    const wants = (totalIncome * 0.30).toFixed(2);
-    const savings = (totalIncome * 0.20).toFixed(2);
+    const remainingIncome = income - totalExpenses;
 
-    // Update the display
+    const needs = (remainingIncome * 0.50).toFixed(2);
+    const wants = (remainingIncome * 0.30).toFixed(2);
+    const savings = (remainingIncome * 0.20).toFixed(2);
+
     document.getElementById('needs').textContent = `Needs: $${needs}`;
     document.getElementById('wants').textContent = `Wants: $${wants}`;
     document.getElementById('savings').textContent = `Savings: $${savings}`;
+}
 
-    // Show the budget allocation section
-    document.getElementById('budgetAllocation').classList.remove('hidden');
-});
-
-// Add new additional income field
-document.getElementById('addIncomeBtn').addEventListener('click', function () {
-    const additionalIncomesContainer = document.getElementById('additionalIncomes');
-    const newIncomeField = document.createElement('div');
-    newIncomeField.className = 'additional-income';
-    newIncomeField.innerHTML = '<input type="number" class="additional-income-input" placeholder="Additional Income">';
-    additionalIncomesContainer.appendChild(newIncomeField);
-});
+// Show the home page initially
+showPage('home');
